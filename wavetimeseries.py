@@ -78,21 +78,30 @@ class WaveTimeSeries:
         colum_names = map(str.lower, list(self.wave_data.columns))
         colum_names = ['Tm' if x == 'tm' or x=='tz' or x =='tmed' or x == 'mwp' or x == 'vtm02' else x for x in colum_names]
         colum_names = ['Tp' if x == 'pp1d' or x =='tpeak' or x =='tp' or  x == 'vtpk' else x for x in colum_names]
+        colum_names = ['Tm_sw' if x =='mpts' else x for x in colum_names]
+        colum_names = ['Tm_ww' if x =='mpww' else x for x in colum_names]
         colum_names = ['Hs' if x =='hsig' or x =='swh' or  x == 'hm0' or x == 'hs' or x == 'vhm0' else x for x in colum_names]
+        colum_names = ['Hs_sw' if x =='shts' else x for x in colum_names]
+        colum_names = ['Hs_ww' if x =='shww' else x for x in colum_names]
         colum_names = ['Dir' if x == 'dm' or x=='mwd' or x =='Dir' or x == 'DirMed' or x == 'vmdr' else x for x in colum_names]
+        colum_names = ['Dir_sw' if x == 'mdts' else x for x in colum_names]
+        colum_names = ['Dir_ww' if x == 'mdww' else x for x in colum_names]
+        colum_names = ['DSp' if x == 'wdw' else x for x in colum_names]
+        colum_names = ['DSp_sw' if x == 'dwps' else x for x in colum_names]
+        colum_names = ['DSp_ww' if x == 'dwww' else x for x in colum_names]
         
         self.wave_data.columns = colum_names
        
         
         
     def __init_wave_labels(self):
-        wave_param_names = ['Hs', 'Hrms', 'Tp', 'Tm', 'Dir']
-        wave_param_data = np.array([['Hs', 'Hrms', 'Tp', 'Tm', r'$\ \theta$'],
-                            ['swh', 'hrms', 'pwp', 'mwp', 'mwd'],
-                            ['Hm0', 'Hrms', 'Tp', 'T0', r'$\ \theta$'],
-                            ['significant wave height', 'root-mean-square wave height', 'peak wave period', 'mean wave period', 'mean wave direction'],
-                            ['altura significativa', 'altura média quadrática', 'período de pico', 'período médio', 'direção média']])
-        units = np.array([['m', 'm', 's', 's', u'\u00b0']])
+        wave_param_names = ['Hs', 'Hrms', 'Hs_sw', 'Hs_ww', 'Tp', 'Tm', 'Tm_sw', 'Tm_ww', 'Dir', 'Dir_sw', 'Dir_ww', 'DSp', 'DSp_sw', 'DSp_ww']
+        wave_param_data = np.array([['Hs', 'Hrms', 'Hs_sw', 'Hs_ww', 'Tp', 'Tm', 'Tm_sw', 'Tm_ww', r'$\ \theta$', r'$\ \theta$', r'$\ \theta$','DSp', 'DSp_sw', 'DSp_ww'],
+                            ['swh', 'hrms', 'shts', 'shww', 'pwp', 'pp1d', 'mwd', 'mpts', 'mpww', 'mdts', 'mdww', 'wdw', 'dwps', 'dwww'],
+                            ['Hm0', 'Hrms', 'Hs_sw', 'Hs_ww', 'Tp', 'T0', 'Tm_sw', 'Tm_ww', r'$\ \theta$', r'$\ \theta$', r'$\ \theta$', 'wdw', 'dwps', 'dwww'],
+                            ['significant wave height', 'root-mean-square wave height', 'significant heigth total swell', 'significant heigth wind waves', 'peak wave period', 'mean wave period', 'mean period total swell' , 'mean period wind waves' , 'mean wave direction', 'mean direction total swell', 'mean direction wind waves', 'wave spectral directional width', 'wave spectral directional width total swell', 'wave spectral directional width wind waves'],
+                            ['altura significativa', 'altura média quadrática', 'altura significativa ondulação', 'altura significativa vaga', 'período de pico', 'período médio', 'período médio ondulação', 'período médio vaga' , 'direção média', 'direção média ondulação', 'direção média vaga', 'dispersão direcional das ondas', 'dispersão direcional ondulação', 'dispersão direcional vaga']])
+        units = np.array([['m', 'm', 'm', 'm', 's', 's', 's', 's' , u'\u00b0', u'\u00b0', u'\u00b0', '1', '1', '1']])
         label_type = ['default', 'ERA5', 'spc', 'en' , 'pt', 'units' ]
         
 
